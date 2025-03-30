@@ -1,0 +1,24 @@
+@startuml
+
+package "Atleta" {
+    class Atleta
+    class Pais
+    Atleta -- Pais : representa >
+}
+
+package "Competicao" {
+    class Competicao
+    class Local
+    class Resultado
+    Competicao -- Local : ocorre em >
+    Competicao -- Resultado : gera >
+}
+
+package "Relatorio" {
+    class RelatorioMedalhas
+    RelatorioMedalhas -- Resultado : < consolida
+}
+
+Atleta -- Competicao : participa >
+
+@enduml

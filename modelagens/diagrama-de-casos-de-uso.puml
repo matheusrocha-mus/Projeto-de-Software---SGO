@@ -1,0 +1,20 @@
+@startuml
+
+actor Administrador
+actor Atleta
+
+rectangle "Sistema de Gestão das Olimpíadas" {
+    usecase "Cadastrar Competições" as UC1
+    usecase "Inscrever em Competições" as UC2
+    usecase "Alocar Locais" as UC3
+    usecase "Registrar Resultados" as UC4
+    usecase "Gerar Relatórios de Medalhas" as UC5
+}
+
+Administrador --> UC1
+Administrador --> UC3
+Administrador --> UC4
+Administrador --> UC5
+Atleta --> UC2
+
+@enduml

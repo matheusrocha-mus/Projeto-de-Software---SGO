@@ -1,0 +1,47 @@
+@startuml
+
+class Competicao {
+    -String nome
+    -Date data
+    -Time horario
+    -Local local
+    -List<Atleta> atletasInscritos
+    +registrarResultado(Atleta ouro, Atleta prata, Atleta bronze)
+}
+
+class Atleta {
+    -String nome
+    -Pais pais
+    -List<Competicao> competicoes
+}
+
+class Pais {
+    -String nome
+    -String codigoISO
+}
+
+class Local {
+    -String nome
+    -String endereco
+    +Boolean disponivel(Date data, Time horario)
+}
+
+class Resultado {
+    -Atleta ouro
+    -Atleta prata
+    -Atleta bronze
+}
+
+class RelatorioMedalhas {
+    -Map<String, Integer> medalhasPorPais
+    +gerarRelatorio()
+}
+
+Competicao "*" -- "*" Atleta : possui >
+Competicao "1" -- "1" Local : ocorre em >
+Competicao "1" -- "1" Resultado : gera >
+Resultado "1" -- "3" Atleta : < medalha
+RelatorioMedalhas "1" -- "*" Resultado : < consolida
+Atleta "*" -- "1" Pais : representa >
+
+@enduml
