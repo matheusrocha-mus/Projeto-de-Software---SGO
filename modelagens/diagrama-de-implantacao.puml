@@ -1,0 +1,25 @@
+@startuml
+
+title Diagrama de Implantação - Sistema de Gestão das Olimpíadas (SGO)
+
+node "Dispositivos dos Usuários" as UserDevices {
+  artifact "Navegador Web" as Browser
+  artifact "Aplicativo Móvel" as MobileApp
+}
+
+node "Servidor de Aplicação" as AppServer {
+  component "Módulo de Cadastro" as ModCadastro
+  component "Módulo de Inscrição" as ModInscricao
+  component "Módulo de Alocação" as ModAlocacao
+  component "Módulo de Resultados" as ModResultados
+  component "Módulo de Relatórios" as ModRelatorios
+}
+
+node "Servidor de Banco de Dados" as DBServer {
+  database "SGO_DB" as Database
+}
+
+UserDevices -> AppServer : HTTP/HTTPS
+AppServer -> DBServer : JDBC/SQL
+
+@enduml

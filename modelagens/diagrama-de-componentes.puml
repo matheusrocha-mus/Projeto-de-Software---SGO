@@ -1,0 +1,45 @@
+@startuml
+
+title Diagrama de Componentes - Sistema de Gestão das Olimpíadas (SGO)
+
+rectangle "Frontend" as FE {
+  component "Interface de Usuário" as UI
+}
+
+rectangle "API" as AP {
+  component "SGO REST API" as RESTAPI
+}
+
+rectangle "Backend" as BE {
+  component "Módulo de Cadastro de Competições" as CadComp
+  component "Módulo de Inscrições" as Inscricoes
+  component "Módulo de Alocação de Locais" as Alocacao
+  component "Módulo de Resultados" as Resultados
+  component "Módulo de Relatórios" as Relatorios
+}
+
+rectangle "Banco de Dados" as BD {
+  database "SGO_DB" as DB
+}
+
+interface "HTTPS (443)" as httpsFront
+UI -down-> httpsFront
+httpsFront -down-> RESTAPI
+
+interface "REST (8080)" as restBackend
+RESTAPI -down-> restBackend
+restBackend -down-> CadComp
+restBackend -down-> Inscricoes
+restBackend -down-> Alocacao
+restBackend -down-> Resultados
+restBackend -down-> Relatorios
+
+interface "DB (3306)" as dbPort
+CadComp -down-> dbPort
+Inscricoes -down-> dbPort
+Alocacao -down-> dbPort
+Resultados -down-> dbPort
+Relatorios -down-> dbPort
+dbPort -down-> DB
+
+@enduml
